@@ -1,0 +1,36 @@
+html {
+    background-image: url(mainBg.jpg);
+}
+
+#heading {
+    color: green;
+    text-align: center;
+    text-shadow: 2px 1px yellow, 1px 2px red;
+}
+
+#container {
+    height: 300px;
+    width: 700px;
+    padding: 50px;
+    display: table-cell;
+}
+
+#map {
+    height: 300px;
+    width: 300px;
+    float: left;
+}
+
+#messageBox {
+    height: 300px;
+    width: 300px;
+    font-size: large;
+    color:white;
+    font-weight: bold;
+    float: right;
+    max-width: 300px;
+}
+
+#buttonArea {
+    padding-left: 50px
+}
