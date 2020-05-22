@@ -85,13 +85,16 @@ function deployComputerShips() {
 function play(that) {
     if (playerShipCount > 0 && computerShipCount > 0) {
         playerTurn(that);
-        computerTurn();
+        if(computerShipCount > 0)
+            computerTurn();
+        else
+            play(that);
     }
     else {
         if(playerShipCount > 0) 
-            messageBox.innerHTML = "You won.";
+            messageBox.innerHTML += "<br>You won.";
         else
-            messageBox.innerHTML = "You lost.";
+            messageBox.innerHTML += "<br>You lost.";
         for(let w = 0; w < allButton.length; w++)
             allButton[w].disabled = true;
     }
@@ -99,13 +102,13 @@ function play(that) {
 
 function playerTurn(that) {
     if(oceanMap[that.id] == 2) {
-        messageBox.innerHTML = "You sunk one of computer's ships.<br>Computer's turn";
+        messageBox.innerHTML = "You sunk one of computer's ships.";
         that.disabled = true;
         that.style.backgroundImage = "url('phit.jpg')";
         computerShipCount--;
     }
     else {
-        messageBox.innerHTML = "You missed.<br>Computer's turn.";
+        messageBox.innerHTML = "You missed.";
         that.disabled = true;
         that.style.backgroundImage = "url('try.jpg')";
     }
@@ -118,11 +121,14 @@ function computerTurn() {
     if(oceanMap[loc] == 2 || oceanMap[loc] == 9)
         computerTurn();
     else {
+        messageBox.innerHTML += "<br>Computer's turn"
         if(oceanMap[loc] == 1) {
             messageBox.innerHTML+="<br>Computer sunk one of your ships.<br>Your turn";
             b[Math.floor(loc/10)][loc%10].style.backgroundImage = "url('chit.jpg')";
             oceanMap[loc] = 9;
             playerShipCount--;
+            if(playerShipCount == 0)
+                play(null);
         }
         else{
             oceanMap[loc] = 9;
